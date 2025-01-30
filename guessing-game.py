@@ -1,5 +1,29 @@
 import random
 
+def cow():
+    return """
+ __________________
+< you won the game! >
+ ------------------
+\\   ^__^
+ \\  (oo)\\_______
+    (__)\\       )\\/\\
+        ||----w |
+        ||     ||
+"""
+
+def cow2():
+    return """
+ __________________
+< you lost, try again >
+ ------------------
+\\   ^__^
+ \\  (oo)\\_______
+    (__)\\       )\\/\\
+        ||----w |
+        ||     ||
+"""
+
 def read_integer(prompt):
     # TODO: Handle parse error
     return int(input(prompt))
@@ -30,9 +54,11 @@ def main():
     # pick random number in range
     my_number = random.randint(x_int, y_int)
 
-    game_over = False
+    active = True
+    attempt = 0
+    max_attempts = 4
 
-    while not game_over:
+    while active:
         # ask user for guess
         user_int = read_integer("Enter your guess: ")
 
@@ -41,23 +67,21 @@ def main():
         elif user_int > my_number:
             print("Your guess is too high")
         else:
-            print("""
- __________________
-< you won the game! >
- ------------------
-\\   ^__^
- \\  (oo)\\_______
-    (__)\\       )\\/\\
-        ||----w |
-        ||     ||
-            """)
-            break
+            print(cow())
+            active = False
+
+        attempt += 1
+
+        if attempt == max_attempts:
+            print(cow2())
+            active = False
+        else:
+            print("You have {remaining} attempts".format(remaining=max_attempts-attempt))
 
         # check if guess is same as random number
         #     - if too low, tell user 'your guess is too low'
         #     - if too high, tell user 'your guess is too high'
         #     - if user guesses correctly, print ascii cow
-        pass
 
 if __name__ == "__main__":
     main()
