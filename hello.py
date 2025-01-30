@@ -1,16 +1,18 @@
 import random
 
+def read_integer(prompt):
+    # TODO: Handle parse error
+    return int(input(prompt))
+
 def main():
     # tell user you want to play a game
     print("Let's play a guessing game")
 
     # ask user for range start
-    x_str = input("Enter the start of the range: ")
-    x_int = int(x_str)
+    x_int = read_integer("Enter the start of the range: ")
 
     # ask user for range end
-    y_str = input("Enter the end of the range: ")
-    y_int = int(y_str)
+    y_int = read_integer("Enter the end of the range: ")
 
     # check if range is valid (lower < upper)
     if y_int < x_int:
@@ -32,8 +34,7 @@ def main():
 
     while not game_over:
         # ask user for guess
-        user_str = input("Enter your guess: ")
-        user_int = int(user_str)
+        user_int = read_integer("Enter your guess: ")
 
         if user_int < my_number:
             print("Your guess is too low")
